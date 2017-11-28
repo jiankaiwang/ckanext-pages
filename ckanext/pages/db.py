@@ -50,8 +50,11 @@ def init_db(model):
                 CREATE TABLE ckanext_pages (
                     id text NOT NULL,
                     title text,
+                    ename text,
+                    cname text,
                     name text,
                     content text,
+                    econtent text,
                     lang text,
                     "order" text,
                     private boolean,
@@ -98,8 +101,11 @@ def init_db(model):
     pages_table = sa.Table('ckanext_pages', model.meta.metadata,
         sa.Column('id', types.UnicodeText, primary_key=True, default=make_uuid),
         sa.Column('title', types.UnicodeText, default=u''),
+        sa.Column('ename', types.UnicodeText, default=u''),
+        sa.Column('cname', types.UnicodeText, default=u''),
         sa.Column('name', types.UnicodeText, default=u''),
         sa.Column('content', types.UnicodeText, default=u''),
+        sa.Column('econtent', types.UnicodeText, default=u''),
         sa.Column('lang', types.UnicodeText, default=u''),
         sa.Column('order', types.UnicodeText, default=u''),
         sa.Column('private',types.Boolean,default=True),
@@ -160,3 +166,4 @@ def table_dictize(obj, context, **kw):
                                        context.get('metadata_modified', ''))
 
     return result_dict
+

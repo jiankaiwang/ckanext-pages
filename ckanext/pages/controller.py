@@ -82,7 +82,8 @@ class PagesController(p.toolkit.BaseController):
 
         if p.toolkit.request.method == 'POST' and not data:
             data = p.toolkit.request.POST
-            items = ['title', 'name', 'content', 'private']
+            # cdc
+            items = ['title', 'ename', 'cname', 'name', 'content', 'econtent', 'private']
             # update config from form
             for item in items:
                 if item in data:
@@ -159,7 +160,8 @@ class PagesController(p.toolkit.BaseController):
 
         if p.toolkit.request.method == 'POST' and not data:
             data = p.toolkit.request.POST
-            items = ['title', 'name', 'content', 'private']
+            # cdc
+            items = ['title', 'ename', 'cname', 'name', 'content', 'econtent', 'private']
             # update config from form
             for item in items:
                 if item in data:
@@ -380,3 +382,4 @@ class PagesController(p.toolkit.BaseController):
         return """<script type='text/javascript'>
                       window.parent.CKEDITOR.tools.callFunction(%s, '%s');
                   </script>""" % (p.toolkit.request.GET['CKEditorFuncNum'], url['url'])
+

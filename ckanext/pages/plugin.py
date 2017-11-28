@@ -39,11 +39,13 @@ def build_pages_nav_main(*args):
 
     for page in pages_list:
         if page['page_type'] == 'blog':
-            link = h.link_to(page.get('title'),
-                             h.url_for('/blog/' + str(page['name'])))
+            # cdc
+            link = h.link_to( h.getLangLabel(page['ename'], page['cname']),
+                             h.url_for('/blog/' + str( page['name'] )))
         else:
-            link = h.link_to(page.get('title'),
-                             h.url_for('/pages/' + str(page['name'])))
+            # cdc
+            link = h.link_to( h.getLangLabel(page['ename'], page['cname']),
+                             h.url_for('/pages/' + str( page['name'] )))
 
         if page['name'] == page_name:
             li = h.literal('<li class="active">') + link + h.literal('</li>')
@@ -220,9 +222,13 @@ class TextBoxView(p.SingletonPlugin):
     def info(self):
         schema = {
             'content': [ignore_missing],
+            'econtent': [ignore_missing],
         }
 
+        # cdc
         return {'name': 'wysiwyg',
+                'ename': 'Free Text',
+                'cname': 'Free Text',
                 'title': 'Free Text',
                 'icon': 'pencil',
                 'iframed': False,
@@ -240,3 +246,4 @@ class TextBoxView(p.SingletonPlugin):
 
     def setup_template_variables(self, context, data_dict):
         return
+

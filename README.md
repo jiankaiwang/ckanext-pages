@@ -1,11 +1,11 @@
 [![Build Status](https://travis-ci.org/ckan/ckanext-pages.svg?branch=master)](https://travis-ci.org/ckan/ckanext-pages)
-[![Coverage Status](https://coveralls.io/repos/ckan/ckanext-pages/badge.svg?branch=master&service=github)](https://coveralls.io/github/ckan/ckanext-pages?branch=master)
+
 ckanext-pages
 =============
 
-This extension gives you an easy way to add simple pages to CKAN.
+This extension gives you an easy way to add simple pages to CKAN. By default you can add pages to the main CKAN menu.
 
-By default you can add pages to the main CKAN menu.
+Current version is the customized one for Taiwan CDC Open Data Portal. The original version is hosted on github.com/ckan.
 
 Works for ckan>=2.3
 
@@ -71,5 +71,7 @@ This enables either the [medium](https://jakiestfu.github.io/Medium.js/docs/) or
 
 Dependencies
 ------------
+
+* [ckanext-cdcmainlib](https://github.com/jiankaiwang/ckanext-cdcmainlib)
 
 * lxml

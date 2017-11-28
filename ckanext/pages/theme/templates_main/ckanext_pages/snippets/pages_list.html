@@ -10,9 +10,9 @@
 #}
 
 {% if type == 'blog' %}
-  <h2>Blog</h2>
+  <h2>{{ h.getLangLabel("News List","訊息列表") }}</h2>
 {% else %}
-  <h2>Pages</h2>
+  <h2>{{ h.getLangLabel("Pages List","頁面列表") }}</h2>
 {% endif %}
 
 {% if pages %}
@@ -34,7 +34,8 @@
         </div>
         <div class="span8">
            <h3 class="dataset-heading">
-              <a href="{{ url }}" >{{ page.title }}</a>
+              {# customized #}
+              <a href="{{ url }}" ><i class="icon-pushpin"></i> {{ h.getLangLabel(page.ename, page.cname) }}</a>
               {% if page.publish_date %}
                  <small class="date"> {{ h.render_datetime(page.publish_date) }} </small>
               {% endif %}
@@ -42,10 +43,10 @@
             {% if page.content %}
               {% if editor %}
               <div>
-                {{page.content|striptags|truncate}}
+                {{h.getLangLabel(page.econtent, page.content)|striptags|truncate}}
               </div>
               {% else %}
-                {{ h.markdown_extract(page.content) }}
+                {{ h.markdown_extract(h.getLangLabel(page.econtent, page.content)) }}
               {% endif %}
             {% else %}
               <p class="empty">{{ _('This page currently has no content') }}</p>
@@ -54,7 +55,7 @@
       {% else %}
         <div class="span11">
           <h3 class="dataset-heading">
-            <a href="{{ url }}" >{{ page.title }}</a>
+            <a href="{{ url }}" ><i class="icon-pushpin"></i> {{ h.getLangLabel(page.ename, page.cname) }}</a>
             {% if page.publish_date %}
                <small class="date"> {{ h.render_datetime(page.publish_date) }} </small>
             {% endif %}
@@ -62,10 +63,10 @@
           {% if page.content %}
             {% if editor %}
             <div>
-              {{page.content|striptags|truncate}}
+              {{h.getLangLabel(page.econtent, page.content)|striptags|truncate}}
             </div>
             {% else %}
-              {{ h.markdown_extract(page.content) }}
+              {{ h.markdown_extract(h.getLangLabel(page.econtent, page.content)) }}
             {% endif %}
           {% else %}
             <p class="empty">{{ _('This page currently has no content') }}</p>
@@ -82,3 +83,4 @@
       <p class="empty">{{ _('There are currently no pages here') }}</p>
     {% endif %}
 {% endif %}
+

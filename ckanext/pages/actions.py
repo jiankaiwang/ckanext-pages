@@ -42,12 +42,16 @@ class HTMLFirstImage(HTMLParser):
         if tag == 'img' and not self.first_image:
             self.first_image = dict(attrs)['src']
 
+# cdc
 schema = {
     'id': [p.toolkit.get_validator('ignore_empty'), unicode],
     'title': [p.toolkit.get_validator('not_empty'), unicode],
+    'ename': [p.toolkit.get_validator('not_empty'), unicode],
+    'cname': [p.toolkit.get_validator('not_empty'), unicode],
     'name': [p.toolkit.get_validator('not_empty'), unicode,
              p.toolkit.get_validator('name_validator'), page_name_validator],
     'content': [p.toolkit.get_validator('ignore_missing'), unicode],
+    'econtent': [p.toolkit.get_validator('ignore_missing'), unicode],
     'page_type': [p.toolkit.get_validator('ignore_missing'), unicode],
   #  'lang': [p.toolkit.get_validator('not_empty'), unicode],
     'order': [p.toolkit.get_validator('ignore_missing'),
@@ -108,12 +112,16 @@ def _pages_list(context, data_dict):
             search['private'] = False
     out = db.Page.pages(**search)
     out_list = []
+    # cdc
     for pg in out:
         parser = HTMLFirstImage()
         parser.feed(pg.content)
         img = parser.first_image
         pg_row = {'title': pg.title,
+                  'ename': pg.ename,
+                  'cname': pg.cname,
                   'content': pg.content,
+                  'econtent': pg.econtent,
                   'name': pg.name,
                   'publish_date': pg.publish_date.isoformat() if pg.publish_date else None,
                   'group_id': pg.group_id,
@@ -158,7 +166,7 @@ def _pages_update(context, data_dict):
         out = db.Page()
         out.group_id = org_id
         out.name = page
-    items = ['title', 'content', 'name', 'private',
+    items = ['title', 'ename', 'cname', 'content', 'econtent', 'name', 'private',
              'order', 'page_type', 'publish_date']
     for item in items:
         setattr(out, item, data.get(item,'page' if item =='page_type' else None)) #backward compatible with older version where page_type does not exist
@@ -295,3 +303,4 @@ def group_pages_list(context, data_dict):
     except p.toolkit.NotAuthorized:
         p.toolkit.abort(401, p.toolkit._('Not authorized to see this page'))
     return _pages_list(context, data_dict)
+
