@@ -5,17 +5,20 @@ ckanext-pages
 
 This extension gives you an easy way to add simple pages to CKAN. By default you can add pages to the main CKAN menu.
 
-Current version is the customized one for Taiwan CDC Open Data Portal. The original version is hosted on github.com/ckan.
+**Current version is the customized one for Taiwan CDC Open Data Portal. The original version is hosted on github.com/ckan.**
 
-Works for ckan>=2.3
+It works for ckan>=2.3 and is developed on ckan 2.5.x.
 
 ## Installation
 
-Use `pip` to install this plugin. This example installs it in `/home/www-data/pyenv`, assuming you have [setup a virtualenv](http://docs.ckan.org/en/latest/maintaining/installing/install-from-source.html#install-ckan-into-a-python-virtual-environment) there:
+Use `pip` to install this plugin. This example installs it in `/usr/lib/ckan/default/src`, assuming you have [setup a virtualenv](http://docs.ckan.org/en/latest/maintaining/installing/install-from-source.html#install-ckan-into-a-python-virtual-environment) there:
 
 ```
-source /home/www-data/pyenv/bin/activate
-pip install -e 'git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pages'
+pip uninstall -y ckanext-pages
+cd /usr/lib/ckan/default/src/
+git clone https://github.com/jiankaiwang/ckanext-pages.git
+cd ./ckanext-pages
+pip install -e .
 ```
 
 Make sure to add `pages` to `ckan.plugins` in your config file:
